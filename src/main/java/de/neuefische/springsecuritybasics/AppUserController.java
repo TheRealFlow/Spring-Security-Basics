@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
 @RestController
@@ -24,8 +25,13 @@ public class AppUserController {
         );
     }
 
-    @GetMapping("/me")
+    @PostMapping("/me")
     public Optional<AppUser> me() {
         return login();
+    }
+
+    @PostMapping("/logout")
+    public void logout(HttpSession httpSession) {
+        httpSession.invalidate();
     }
 }
