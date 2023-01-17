@@ -7,9 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AppUser {
+public class Book {
     private String id;
-    private String username;
-    private String password;
-    private String role;
+    private String title;
+    private String author;
 }

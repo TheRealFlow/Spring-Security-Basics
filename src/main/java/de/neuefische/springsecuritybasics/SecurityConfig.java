@@ -24,6 +24,7 @@ public class SecurityConfig {
                 .httpBasic().and()
                 .authorizeHttpRequests()
                 .antMatchers(HttpMethod.POST, "/app-user").permitAll()
+                .antMatchers(HttpMethod.POST, "/books").hasRole("ADMIN")
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -44,7 +45,7 @@ public class SecurityConfig {
             return User.builder()
                     .username(appUser.getUsername())
                     .password(appUser.getPassword())
-                    .roles("BASIC")
+                    .roles(appUser.getRole())
                     .build();
         };
     }
