@@ -33,4 +33,10 @@ public class AppUserService {
     public Optional<AppUser> findByUsername(String username) {
         return appUserRepository.findByUsername(username);
     }
+
+    public Optional<AppUser> findByUsernameWithoutPassword (String username) {
+        Optional<AppUser> appUser = appUserRepository.findByUsername(username);
+        appUser.ifPresent(user -> user.setPassword(""));
+        return appUser;
+    }
 }
