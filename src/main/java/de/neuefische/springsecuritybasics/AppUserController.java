@@ -20,17 +20,19 @@ public class AppUserController {
 
     @PostMapping("/login")
     public Optional<AppUser> login() {
-        return me();
+        return appUserService.findByUsernameWithoutPassword(
+                SecurityContextHolder.getContext().getAuthentication().getName()
+        );
     }
 
-    @PostMapping("/me")
+    @GetMapping("/me")
     public Optional<AppUser> me() {
         return appUserService.findByUsernameWithoutPassword(
                 SecurityContextHolder.getContext().getAuthentication().getName()
         );
     }
 
-    @PostMapping("/logout")
+    @GetMapping("/logout")
     public void logout(HttpSession httpSession) {
         httpSession.invalidate();
     }
