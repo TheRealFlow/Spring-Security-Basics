@@ -56,4 +56,12 @@ public class AppUserService {
         appUser.ifPresent(user -> user.setPassword(""));
         return appUser;
     }
+
+    public AppUser getAuthenticatedUser () {
+        return findByUsernameWithoutPassword(
+                SecurityContextHolder.getContext().getAuthentication().getName()
+        ).orElseThrow(
+                () -> new ResponseStatusException(HttpStatus.FORBIDDEN)
+        );
+    }
 }
